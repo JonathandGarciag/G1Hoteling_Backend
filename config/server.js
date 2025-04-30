@@ -10,6 +10,9 @@ import limiter from '../src/middlewares/validar-cant-peticiones.js'
 import createAdmin from '../src/database/default-admin.js'
 import createRoles from '../src/database/default-role.js'
 
+import userRoutes from '../src/user/user.routes.js';
+import authRoutes from '../src/auth/auth.routes.js';
+import hotelRoutes from '../src/hotel/hotel.routes.js'
 
 const middlewares = (app) => {
     app.use(express.urlencoded({extended: false}))
@@ -21,7 +24,9 @@ const middlewares = (app) => {
 } 
 
 const routes = (app) => {
-
+    app.use("/hoteling/vht/user", userRoutes)
+    app.use("/hoteling/vht/auth", authRoutes)
+    app.use("/hoteling/vht/hotel", hotelRoutes)
 }
 
 const conectarDB = async () =>{

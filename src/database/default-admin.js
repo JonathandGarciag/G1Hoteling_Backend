@@ -3,7 +3,7 @@ import Admin from "../user/user.model.js";
 
 const createAdmin = async () => {
     try {
-        const aEmail = "jgarciadmin@gmail.com";
+        const aEmail = "hoteleria@gmail.com";
         const aPassword = "12345678";
 
         const existingAdmin = await Admin.findOne({ email: aEmail });
@@ -12,8 +12,8 @@ const createAdmin = async () => {
             const encryptedPassword = await argon2.hash(aPassword);
 
             const aUser = new Admin({
-                name: "Jonathan Gutierrez",
-                username: "AdminJhonny",
+                name: "Hoteleria",
+                username: "GrupoUno",
                 email: aEmail,
                 password: encryptedPassword,
                 role: "ADMIN_ROLE",
@@ -22,9 +22,7 @@ const createAdmin = async () => {
 
             await aUser.save();
             console.log("--> Usuario ADMIN creado correctamente.");
-        } else {
-            console.log("--> Ya existe un usuario ADMIN.");
-        }
+        } 
     } catch (err) {
         console.error("--> Error al crear el ADMIN por defecto:", err);
     }

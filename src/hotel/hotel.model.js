@@ -19,10 +19,10 @@ const hotelSchema = Schema({
         type: [String],
         default: []
     },
-    roomPrice: {
-        type: Number,
-        required: [true, 'Room price is required'],
-        min: [0, 'Price cannot be negative']
+    accessToken: {
+        type: String,
+        required: true,
+        unique: true
     },
     status: {
         type: Boolean,
