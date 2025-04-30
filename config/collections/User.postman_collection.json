@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "b124636f-1c20-4204-821f-a33c9855fa76",
+		"name": "User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42619043"
+	},
+	"item": [
+		{
+			"name": "Get User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/user/viewUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"user",
+						"viewUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNThhN2VkNzBhYzcwZWFjMjgzMzgiLCJpYXQiOjE3NDU5NjgxMjgsImV4cCI6MTc0NTk3MTcyOH0.Zigtn4x8zNhDFoTko5dfumDVtBOXSU6kM1QhQxnlVmE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Luis M. Actualizado\",\r\n  \"username\": \"luismora\",\r\n  \"password\": \"12345678\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/user/updProfile/681158a7ed70ac70eac28338",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"user",
+						"updProfile",
+						"681158a7ed70ac70eac28338"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Credentials",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNThhN2VkNzBhYzcwZWFjMjgzMzgiLCJpYXQiOjE3NDU5NjgxMjgsImV4cCI6MTc0NTk3MTcyOH0.Zigtn4x8zNhDFoTko5dfumDVtBOXSU6kM1QhQxnlVmE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"nuevaClave123\",\r\n  \"oldPassword\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/user/updCredentials/681158a7ed70ac70eac28338",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"user",
+						"updCredentials",
+						"681158a7ed70ac70eac28338"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNjcwODI4ZWVlZjhiMDM4NzNmZDUiLCJpYXQiOjE3NDU5NzEyMzksImV4cCI6MTc0NTk3NDgzOX0.vXQBo_UJNZTBlZNU2N4Q9iadQ68ADIgRcidKrEZI-_0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"12345678\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/user/deleteUser/6811670828eeef8b03873fd5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"user",
+						"deleteUser",
+						"6811670828eeef8b03873fd5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

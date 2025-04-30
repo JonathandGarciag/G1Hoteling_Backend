@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "ad152c7f-ce71-4cd3-a92d-0dc095176b71",
+		"name": "Hotel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42619043"
+	},
+	"item": [
+		{
+			"name": "Get Hotel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/hotel/viewHotel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"hotel",
+						"viewHotel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Hotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNTJlNDEyZDMwMWY5Zjc5M2QxZDIiLCJpYXQiOjE3NDU5NzUzOTksImV4cCI6MTc0NTk3ODk5OX0.4YSDzMCqsTySIjaK8SusJkBtDh4ZKgvqJjNdhMheDVo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Latzio\",\r\n  \"address\": \"Zona 15\",\r\n  \"qualification\": \"4\",\r\n  \"amenities\": [\"wifi\", \"piscina\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/hotel/registerHotel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"hotel",
+						"registerHotel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assing Hotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNTJlNDEyZDMwMWY5Zjc5M2QxZDIiLCJpYXQiOjE3NDU5NzcyOTEsImV4cCI6MTc0NTk4MDg5MX0.e4I3cqlYAq_WoXNnh3Q_uNNy1Vqwe-w-E7m8DhBBGzs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExODE0NDQ5MWYzZmJiNGMyMjFlMzciLCJpYXQiOjE3NDU5Nzc3NjYsImV4cCI6MTc0NTk5MjE2Nn0.3x7yr_ZLJfhj7-2k4vFHvf3rekR11bgzcblKm2eRD_0\",   \r\n  \"hotelToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOnsibmFtZSI6IkhvdGVsIExhdHppbyIsImNyZWF0ZWRBdCI6IjIwMjUtMDQtMzBUMDE6Mzg6NTEuNjU0WiJ9LCJpYXQiOjE3NDU5NzcxMzEsImV4cCI6MTc0NTk4MDczMX0.g_VV-pBpkB-Z6cDlPFWZ-FsPGlbl0ZCUOFnpUUhUCTo\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/hotel/assignHotelToUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"hotel",
+						"assignHotelToUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Hotel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNjk2MjRhMGRkMDI2MTdjZGFmZTMiLCJpYXQiOjE3NDU5NzE2MDgsImV4cCI6MTc0NTk3NTIwOH0.UuWTOQhuWjcmn08f7ESA7C-yJQIg_MeXy465Oa-9WwA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Atlántida Renovado\",\r\n  \"qualification\": \"4\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/hotel/updateHotel/68116425e42b7099be896242",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"hotel",
+						"updateHotel",
+						"68116425e42b7099be896242"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletHotel",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNTJlNDEyZDMwMWY5Zjc5M2QxZDIiLCJpYXQiOjE3NDU5NjkxNzksImV4cCI6MTc0NTk3Mjc3OX0.ZaDUMZlrwhunD5hIgiK483_5X6OXkiIYLEfIKGYJWVM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/hotel/deleteHt/68116a044a0dd02617cdafec",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"hotel",
+						"deleteHt",
+						"68116a044a0dd02617cdafec"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

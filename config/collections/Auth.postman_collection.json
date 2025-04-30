@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "56cabeb4-66f7-4588-ac56-35c056a60144",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42619043"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Samuel Luque\",\r\n  \"username\": \"luq.hotel\",\r\n  \"email\": \"sque@hotel.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"hoteleria@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"sque@hotel.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODExNTJlNDEyZDMwMWY5Zjc5M2QxZDIiLCJpYXQiOjE3NDU5NzcyOTEsImV4cCI6MTc0NTk4MDg5MX0.e4I3cqlYAq_WoXNnh3Q_uNNy1Vqwe-w-E7m8DhBBGzs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role\": \"HOTEL_ROLE\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:27017/hoteling/vht/auth/updateRole/68118144491f3fbb4c221e37",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "27017",
+					"path": [
+						"hoteling",
+						"vht",
+						"auth",
+						"updateRole",
+						"68118144491f3fbb4c221e37"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "681152e512d301f9f793d1d5"
+  },
+  "role": "ADMIN_ROLE",
+  "createdAt": {
+    "$date": "2025-04-29T22:29:57.013Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T22:29:57.013Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "681152e512d301f9f793d1d8"
+  },
+  "role": "CLIENT_ROLE",
+  "createdAt": {
+    "$date": "2025-04-29T22:29:57.027Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T22:29:57.027Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6811552d289dde91d4d7c187"
+  },
+  "role": "HOTEL_ROLE",
+  "createdAt": {
+    "$date": "2025-04-29T22:39:41.097Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T22:39:41.097Z"
+  }
+}]

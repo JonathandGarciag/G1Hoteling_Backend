@@ -1,0 +1,94 @@
+[{
+  "_id": {
+    "$oid": "681152e412d301f9f793d1d2"
+  },
+  "name": "Hoteleria",
+  "username": "GrupoUno",
+  "email": "hoteleria@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$HtURcM2W0biB/HPMu1NQ1Q$H4DPJyLG9YmsmeSs+GjpUDZ3YEEhjIoHd8MhFXT32U8",
+  "hotelId": null,
+  "role": "ADMIN_ROLE",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-29T22:29:56.990Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T22:29:56.990Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "681158a7ed70ac70eac28338"
+  },
+  "name": "Luis M. Actualizado",
+  "username": "luismora",
+  "email": "luis@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$AnyrwokoRXRB8CVJyF/mIg$/glW6n0o1BZwG0cA/dlbWiPa9SH4kgCKQJgfz7AvWas",
+  "hotelId": null,
+  "role": "CLIENT_ROLE",
+  "status": false,
+  "createdAt": {
+    "$date": "2025-04-29T22:54:31.185Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T23:25:06.632Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6811598bed70ac70eac2833d"
+  },
+  "name": "Morales de la Cruz",
+  "username": "luigui",
+  "email": "luisandro@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$C7XiMZBHooJsWoQmliUSqw$v0wlLxZzDff+udiZ8rk3/hnIVt4GZFy63XEPMF/u8Ms",
+  "hotelId": null,
+  "role": "HOTEL_ROLE",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-29T22:58:19.607Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-29T23:29:14.719Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "681169624a0dd02617cdafe3"
+  },
+  "name": "San Obrador",
+  "username": "Obrador.hotel",
+  "email": "santo@hotel.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$9L6NfW8njTWTG4tHOKBKUg$nZSKWePKSNn0dgXiVICLx1/RmEv1Y4HiJfT9llRlazg",
+  "hotelId": {
+    "$oid": "68116425e42b7099be896242"
+  },
+  "role": "HOTEL_ROLE",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-30T00:05:54.089Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T00:05:54.089Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68118144491f3fbb4c221e37"
+  },
+  "name": "Samuel Luque",
+  "username": "luq.hotel",
+  "email": "sque@hotel.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$iwDhKoompIw4mo1fgy40aw$xaNWD8o4IeKaVze2Z344UcoDdjdLcDuDgrrtZs6HSsg",
+  "hotelId": {
+    "$oid": "68117f2b8751931e9f8e3bbc"
+  },
+  "role": "HOTEL_ROLE",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-30T01:47:48.870Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T01:49:37.244Z"
+  }
+}]

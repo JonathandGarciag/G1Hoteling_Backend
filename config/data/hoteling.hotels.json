@@ -1,0 +1,79 @@
+[{
+  "_id": {
+    "$oid": "68116425e42b7099be896242"
+  },
+  "name": "Hotel Atlántida Renovado",
+  "address": "Zona 18, Ciudad de Guatemala",
+  "qualification": "4",
+  "amenities": [
+    "wifi",
+    "desayuno",
+    "gimnasio"
+  ],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-29T23:43:33.554Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T00:08:08.847Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68116a044a0dd02617cdafec"
+  },
+  "name": "Hotel Olimpia",
+  "address": "Zona 1",
+  "qualification": "1",
+  "amenities": [
+    "wifi",
+    "gimnasio"
+  ],
+  "status": false,
+  "createdAt": {
+    "$date": "2025-04-30T00:08:36.549Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T00:10:41.132Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "681179c988fd399aa68c1f26"
+  },
+  "name": "Hotel lastom",
+  "address": "Zona 15",
+  "qualification": "4",
+  "amenities": [
+    "wifi",
+    "piscina"
+  ],
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOnsibmFtZSI6IkhvdGVsIGxhc3RvbSIsImNyZWF0ZWRBdCI6IjIwMjUtMDQtMzBUMDE6MTU6NTMuMzg5WiJ9LCJpYXQiOjE3NDU5NzU3NTMsImV4cCI6MTc0NTk3OTM1M30.1J4ChrM3qF-GLo7odSUfIhkDEyKAeUppZFMW0qfwx-U",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-30T01:15:53.402Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T01:15:53.402Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68117f2b8751931e9f8e3bbc"
+  },
+  "name": "Hotel Latzio",
+  "address": "Zona 15",
+  "qualification": "4",
+  "amenities": [
+    "wifi",
+    "piscina"
+  ],
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOnsibmFtZSI6IkhvdGVsIExhdHppbyIsImNyZWF0ZWRBdCI6IjIwMjUtMDQtMzBUMDE6Mzg6NTEuNjU0WiJ9LCJpYXQiOjE3NDU5NzcxMzEsImV4cCI6MTc0NTk4MDczMX0.g_VV-pBpkB-Z6cDlPFWZ-FsPGlbl0ZCUOFnpUUhUCTo",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-04-30T01:38:51.668Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-30T01:38:51.668Z"
+  }
+}]
