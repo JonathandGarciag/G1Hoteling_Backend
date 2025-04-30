@@ -55,3 +55,40 @@ export const validAssingHotel = [
     validarCampos
 ];  
 
+export const validCreateRoom = [
+    check('hotelId', 'El ID del hotel es obligatorio').not().isEmpty().isMongoId(),
+    check('roomType', 'El tipo de habitación es obligatorio').not().isEmpty(),
+    check('capacity', 'La capacidad debe ser un número entero mayor a 0').isInt({ min: 1 }),
+    check('pricePerNight', 'El precio debe ser un número mayor o igual a 0').isFloat({ min: 0 }),
+    check('availability', 'La disponibilidad debe ser un arreglo válido').isArray(),
+    check('status', 'Estado inválido').optional().isIn(['disponible', 'reservada', 'en mantenimiento']),
+    validarCampos
+];
+
+export const validUpdateRoom = [
+    check('roomType', 'El tipo de habitación es obligatorio').optional().not().isEmpty(),
+    check('capacity', 'La capacidad debe ser un número entero mayor a 0').optional().isInt({ min: 1 }),
+    check('pricePerNight', 'El precio debe ser un número mayor o igual a 0').optional().isFloat({ min: 0 }),
+    check('availability', 'La disponibilidad debe ser un arreglo válido').optional().isArray(),
+    check('status', 'Estado inválido').optional().isIn(['disponible', 'reservada', 'en mantenimiento']),
+    validarCampos
+];
+
+export const validCreateReservation = [
+    check('userId', 'El ID del usuario es obligatorio').not().isEmpty().isMongoId(),
+    check('hotelId', 'El ID del hotel es obligatorio').not().isEmpty().isMongoId(),
+    check('roomId', 'El ID de la habitación es obligatorio').not().isEmpty().isMongoId(),
+    check('startDate', 'La fecha de inicio es obligatoria').not().isEmpty().isISO8601(),
+    check('endDate', 'La fecha de fin es obligatoria').not().isEmpty().isISO8601(),
+    check('totalPrice', 'El precio total debe ser un número positivo').isFloat({ min: 0 }),
+    validarCampos
+];
+
+export const validUpdateReservation = [
+    check('startDate', 'La fecha de inicio debe ser válida').optional().isISO8601(),
+    check('endDate', 'La fecha de fin debe ser válida').optional().isISO8601(),
+    check('totalPrice', 'El precio total debe ser un número positivo').optional().isFloat({ min: 0 }),
+    check('status', 'Estado inválido').optional().isIn(['confirmada', 'cancelada', 'finalizada']),
+    validarCampos
+];
+
