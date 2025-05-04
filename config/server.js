@@ -14,6 +14,12 @@ import userRoutes from '../src/user/user.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
 import hotelRoutes from '../src/hotel/hotel.routes.js'
 
+import roomRoutes from '../src/habitacion/room.routes.js';
+import reservationRoutes from '../src/reservation/reservation.routes.js';
+import facturaRoutes from '../src/factura/factura-routes.js';
+
+import eventoRoutes from '../src/eventos/eventos-routes.js';
+
 const middlewares = (app) => {
     app.use(express.urlencoded({extended: false}))
     app.use(cors())
@@ -27,6 +33,10 @@ const routes = (app) => {
     app.use("/hoteling/vht/user", userRoutes)
     app.use("/hoteling/vht/auth", authRoutes)
     app.use("/hoteling/vht/hotel", hotelRoutes)
+    app.use("/hoteling/vht/room", roomRoutes)
+    app.use("/hoteling/vht/reservation", reservationRoutes)
+    app.use("/hoteling/vht/factura", facturaRoutes)
+    app.use("/hoteling/vht/evento", eventoRoutes)
 }
 
 const conectarDB = async () =>{

@@ -15,7 +15,7 @@ export const validarAdminRole = (req, res, next) => {
     next();
 };
 
-export const esAdminOMismoHotel = (req, res, next) => {
+export const adminOMismoHotel = (req, res, next) => {
     const { role, hotelId, _id } = req.user;
     const hotelParamId = req.params.id;
 
@@ -27,4 +27,55 @@ export const esAdminOMismoHotel = (req, res, next) => {
         success: false,
         msg: "No tienes permiso para modificar este hotel"
     });
+};
+
+export const duenioHotel = (req, res, next) => {
+    const user = req.user; 
+  
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        msg: "Token inválido o no autenticado"
+      });
+    }
+  
+    const { role, hotelId: userHotelId } = user;
+    const { hotelId } = req.body;
+  
+    if (
+      role !== "HOTEL_ROLE" ||
+      !hotelId ||
+      userHotelId?.toString() !== hotelId?.toString()
+    ) {
+      return res.status(403).json({
+        success: false,
+        msg: "No tienes permiso para registrar habitaciones en este hotel"
+      });
+    }
+  
+    next();
+};
+
+export const huespedlByRoom = async (req, res, next) => {
+    try {
+        const { role, hotelId: userHotelId } = req.usuario;
+        const roomId = req.params.id;
+
+        const room = await Room.findById(roomId);
+        if (!room) {
+            return res.status(404).json({ success: false, msg: "Habitación no encontrada" });
+        }
+
+        if (role !== "HOTEL_ROLE" || room.hotelId.toString() !== userHotelId.toString()) {
+            return res.status(403).json({ success: false, msg: "No eres dueño de esta habitación" });
+        }
+
+        next();
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            msg: "Error en la validación de dueño",
+            error: error.message
+        });
+    }
 };

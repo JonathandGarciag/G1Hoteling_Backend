@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { assignHotelToUser, createHotel, deleteHotel, getHotels, updateHotel } from './hotel.controller.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
-import { esAdminOMismoHotel, validarAdminRole } from '../middlewares/validar-roles.js';
+import { adminOMismoHotel, validarAdminRole } from '../middlewares/validar-roles.js';
 import { validAssingHotel, validcreateHotels, validUpdateHotels } from '../middlewares/validator.js';
 import { validarTokensHotelUser } from '../helpers/db-validator.js';
 
@@ -27,7 +27,7 @@ router.put(
     '/updateHotel/:id',
     [
         validarJWT,
-        esAdminOMismoHotel,
+        adminOMismoHotel,
         validUpdateHotels
     ],
     updateHotel
@@ -38,7 +38,7 @@ router.delete(
     [
         validarJWT,
         validarAdminRole,
-        esAdminOMismoHotel,
+        adminOMismoHotel,
         validarCampos
     ],
     deleteHotel
