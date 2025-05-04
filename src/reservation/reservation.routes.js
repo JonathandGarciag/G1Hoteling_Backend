@@ -3,7 +3,11 @@ import { createReservation, getReservationsByUser, updateReservation, getReserva
 
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
+<<<<<<< HEAD
 import { esAdminOMismoHotel, validarAdminRole } from '../middlewares/validar-roles.js';
+=======
+import { adminOMismoHotel, validarAdminRole } from '../middlewares/validar-roles.js';
+>>>>>>> feature/jgarcia-23105
 import { validCreateReservation, validUpdateReservation } from '../middlewares/validator.js';
 
 const router = Router();
