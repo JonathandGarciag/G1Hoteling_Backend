@@ -84,7 +84,7 @@ export const deleteRoom = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedRoom = await Room.findByIdAndDelete(id);
+    const deletedRoom = await Room.findByIdAndUpdate(id, { status: 'false' }, { new: true });
 
     if (!deletedRoom) {
       return res.status(404).json({
@@ -95,12 +95,12 @@ export const deleteRoom = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      msg: 'Habitación eliminada correctamente'
+      msg: 'Habitación deshabilitada correctamente'
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      msg: 'Error al eliminar habitación',
+      msg: 'Error al deshabilitar habitación',
       error: error.message
     });
   }

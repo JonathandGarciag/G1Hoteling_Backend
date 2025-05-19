@@ -4,12 +4,12 @@ const userSchema = Schema({
     name: {
         type: String,
         required: [true, "Name is required"],
-        maxLenght: [25, "Max is 25 characters"]
+        maxlength : [25, "Max is 25 characters"]
     },
     username: {
         type: String,
         required: [true, "Name is required"],
-        maxLenght: [25, "Cannot exceed 25 characters"]
+        maxlength: [25, "Cannot exceed 25 characters"]
     },
     email: {
         type: String,
@@ -19,7 +19,7 @@ const userSchema = Schema({
     password: {  
         type: String,
         required: [true, "Password is required"],
-        minLenght: 8
+        minLength: 8
     },
     hotelId: {
         type: Types.ObjectId,

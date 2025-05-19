@@ -13,11 +13,11 @@ import createRoles from '../src/database/default-role.js'
 import userRoutes from '../src/user/user.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
 import hotelRoutes from '../src/hotel/hotel.routes.js'
-
 import roomRoutes from '../src/habitacion/room.routes.js';
 import reservationRoutes from '../src/reservation/reservation.routes.js';
 import facturaRoutes from '../src/factura/factura-routes.js';
 import eventoRoutes from '../src/eventos/eventos-routes.js';
+import statisticsRoutes from '../src/statistics/statistics.routes.js'
 
 const middlewares = (app) => {
     app.use(express.urlencoded({extended: false}))
@@ -36,6 +36,7 @@ const routes = (app) => {
     app.use("/hoteling/vht/reservation", reservationRoutes)
     app.use("/hoteling/vht/factura", facturaRoutes)
     app.use("/hoteling/vht/evento", eventoRoutes)
+    app.use("/hoteling/vht/statistics", statisticsRoutes);
 }
 
 const conectarDB = async () =>{

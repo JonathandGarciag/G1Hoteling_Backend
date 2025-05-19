@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { createReservation, getReservationsByUser, updateReservation, getReservationsByHotel, deleteReservation } from './reservation.controller.js';
-
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
-import { esAdminOMismoHotel, validarAdminRole } from '../middlewares/validar-roles.js';
+import { adminOMismoHotel, duenioHotel, esMismoUsuario, validarAdminRole } from '../middlewares/validar-roles.js';
 import { validCreateReservation, validUpdateReservation } from '../middlewares/validator.js';
 
 const router = Router();
@@ -11,8 +10,8 @@ const router = Router();
 router.post(
     '/registerReservation',
     [
-    validarJWT,
-    validCreateReservation
+        validarJWT,
+        validCreateReservation
     ],
     createReservation
 );
@@ -20,22 +19,26 @@ router.post(
 router.get(
     '/viewReservations/:userId',
     [
-    validarJWT
+        validarJWT,
+        esMismoUsuario
     ],
     getReservationsByUser
 );
 
 router.get(
     '/viewReservationsByHotel/:hotelId',
-    [validarJWT],
+    [
+        validarJWT
+    ],
     getReservationsByHotel
 );
 
 router.put(
     '/updateReservation/:id',
     [
-    validarJWT,
-    validUpdateReservation
+        validarJWT,
+        duenioHotel,
+        validUpdateReservation
     ],
     updateReservation
 );
@@ -43,10 +46,10 @@ router.put(
 router.delete(
     '/deleteReservation/:id',
     [
-    validarJWT,
-    validarAdminRole,
-    esAdminOMismoHotel,
-    validarCampos
+        validarJWT,
+        validarAdminRole,
+        adminOMismoHotel,
+        validarCampos
     ],
     deleteReservation
 );

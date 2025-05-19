@@ -7,7 +7,7 @@ import path from "path";
 
 export const confirmPurchase = async (req, res) => {
   try {
-    const { usuario } = req;
+    const usuario = req.user; 
     const { reservationId, additionalServices = [] } = req.body;
 
     if (!reservationId) {
@@ -28,9 +28,9 @@ export const confirmPurchase = async (req, res) => {
     const totalAmount = roomCharges + servicesTotal;
 
     const factura = new Factura({
-      reservationId: reservacion._id,
-      userId: usuario._id,
-      hotelId: reservacion.hotelId._id,
+      reservation: reservacion._id,
+      user: usuario._id,
+      hotel: reservacion.hotelId._id,
       roomCharges,
       additionalServices,
       totalAmount,
@@ -97,11 +97,10 @@ export const confirmPurchase = async (req, res) => {
   }
 };
 
-
 export const getPurchases = async (req, res) => {
   try {
-    const { usuario } = req;
-    const facturas = await Factura.find({ userId: usuario._id });
+    const usuario = req.user; 
+    const facturas = await Factura.find({ user: usuario._id });
 
     if (!facturas || facturas.length === 0) {
       return res.status(400).json({
@@ -112,7 +111,7 @@ export const getPurchases = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      facturas: facturas
+      facturas
     });
   } catch (err) {
     res.status(500).json({

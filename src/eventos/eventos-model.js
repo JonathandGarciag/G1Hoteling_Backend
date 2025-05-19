@@ -20,8 +20,8 @@ const eventoSchema = new Schema({
     required: true
   },
   serviciosIncluidos: {
-    type: String,
-    default: 0
+    type: [String],
+    default: []
   },
   estado: {
     type: String,
@@ -29,7 +29,8 @@ const eventoSchema = new Schema({
     default: "programado"
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 export default model("Evento", eventoSchema);

@@ -1,7 +1,6 @@
 import Evento from "../eventos/eventos-model.js";
 import Hotel from "../hotel/hotel.model.js";
 
-
 export const createEvento = async (req, res) => {
   try {
     const { hotelId, titulo, descripcion, fecha, serviciosIncluidos } = req.body;
@@ -9,6 +8,10 @@ export const createEvento = async (req, res) => {
     const hotel = await Hotel.findById(hotelId);
     if (!hotel) {
       return res.status(404).json({ success: false, message: "Hotel no encontrado." });
+    }
+
+    if (!Array.isArray(serviciosIncluidos)) {
+      return res.status(400).json({ success: false, message: "serviciosIncluidos debe ser un arreglo." });
     }
 
     const nuevoEvento = new Evento({
@@ -31,11 +34,14 @@ export const createEvento = async (req, res) => {
   }
 };
 
-
 export const editarEvento = async (req, res) => {
   try {
     const { id } = req.params;
     const datosActualizados = req.body;
+
+    if (datosActualizados.serviciosIncluidos && !Array.isArray(datosActualizados.serviciosIncluidos)) {
+      return res.status(400).json({ success: false, message: "serviciosIncluidos debe ser un arreglo." });
+    }
 
     const eventoActualizado = await Evento.findByIdAndUpdate(id, datosActualizados, { new: true });
 
@@ -52,7 +58,6 @@ export const editarEvento = async (req, res) => {
     res.status(500).json({ success: false, message: "Error al actualizar el evento.", error: error.message });
   }
 };
-
 
 export const cancelarEvento = async (req, res) => {
   try {

@@ -1,56 +1,67 @@
 import Reservation from './reservation.model.js';
 
 export const createReservation = async (req, res) => {
-    try {
-        const {
-            userId,
-            hotelId,
-            roomId,
-            startDate,
-            endDate,
-            totalPrice
-        } = req.body;
+  try {
+    const userId = req.user._id; 
+    const { hotelId, roomId, startDate, endDate, totalPrice } = req.body;
 
-        const reservation = await Reservation.create({
-            userId,
-            hotelId,
-            roomId,
-            startDate,
-            endDate,
-            totalPrice
-        });
+    const reservation = await Reservation.create({
+      userId,
+      hotelId,
+      roomId,
+      startDate,
+      endDate,
+      totalPrice
+    });
 
-        return res.status(201).json({
-            success: true,
-            msg: 'Reservación creada correctamente',
-            reservation
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            msg: 'Error al crear la reservación',
-            error: error.message
-        });
-    }
+    return res.status(201).json({
+      success: true,
+      msg: 'Reservación creada correctamente',
+      reservation
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: 'Error al crear la reservación',
+      error: error.message
+    });
+  }
 };
 
 export const getReservationsByUser = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const reservations = await Reservation.find({ userId });
+  try {
+    const userId = req.user._id;
+    const reservations = await Reservation.find({ userId });
 
-        return res.status(200).json({
-            success: true,
-            reservations
-        });
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            msg: 'Error al obtener reservaciones',
-            error: error.message
-        });
-    }
+    return res.status(200).json({
+      success: true,
+      reservations
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: 'Error al obtener reservaciones',
+      error: error.message
+    });
+  }
+};
+
+export const getReservationsByHotel = async (req, res) => {
+  try {
+    const hotelId = req.user.hotelId; 
+    const reservations = await Reservation.find({ hotelId });
+
+    return res.status(200).json({
+      success: true,
+      reservations
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: 'Error al obtener reservaciones por hotel',
+      error: error.message
+    });
+  }
 };
 
 export const updateReservation = async (req, res) => {
@@ -107,21 +118,3 @@ export const deleteReservation = async (req, res) => {
     }
 };
 
-export const getReservationsByHotel = async (req, res) => {
-    try {
-        const { hotelId } = req.params;
-
-        const reservations = await Reservation.find({ hotelId });
-
-        return res.status(200).json({
-            success: true,
-            reservations
-        });
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            msg: 'Error al obtener reservaciones por hotel',
-            error: error.message
-        });
-    }
-};
