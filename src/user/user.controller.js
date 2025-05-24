@@ -110,12 +110,12 @@ export const deleteUser = async (req, res) => {
 export const updateUserRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const { newRole } = req.body;
+    const { role } = req.body; 
 
     const user = await User.findById(id);
     if (!user) return res.status(404).json({ msg: "Usuario no encontrado" });
 
-    user.role = newRole;
+    user.role = role;
     await user.save();
 
     return res.status(200).json({ msg: "Rol actualizado con éxito", user });

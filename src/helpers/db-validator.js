@@ -76,3 +76,63 @@ export const validarTokensHotelUser = async (req, res, next) => {
     }
 };
 
+export const validarHotelUnico = async (req, res, next) => {
+    const { role, _id: userId } = req.user;
+
+    if (role === "HOTEL_ROLE") {
+        const user = await User.findById(userId);
+
+        if (!user) {
+        return res.status(404).json({
+            success: false,
+            msg: "Usuario no encontrado"
+        });
+        }
+
+        if (user.hotelId) {
+        return res.status(400).json({
+            success: false,
+            msg: "Ya tienes un hotel asignado. No puedes crear otro."
+        });
+        }
+    }
+
+    next();
+};
+
+export const validarCalificacion = (req, res, next) => {
+  const { rating } = req.body;
+
+  if (!['1', '2', '3', '4', '5'].includes(String(rating))) {
+    return res.status(400).json({
+      success: false,
+      msg: "La calificación debe ser un número entre 1 y 5"
+    });
+  }
+
+  next();
+};
+
+export const validarHotelPorId = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const hotel = await Hotel.findById(id);
+
+    if (!hotel || hotel.status === false) {
+      return res.status(404).json({
+        success: false,
+        msg: "Hotel no encontrado o deshabilitado"
+      });
+    }
+
+    req.hotelDB = hotel;
+    next();
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      msg: "ID de hotel inválido",
+      error: error.message
+    });
+  }
+};

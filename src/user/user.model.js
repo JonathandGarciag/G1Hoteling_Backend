@@ -26,6 +26,12 @@ const userSchema = Schema({
         ref: 'Hotel',
         default: null
     },
+    resetToken: {
+        type: String
+    },
+    resetTokenExpires: {
+        type: Date
+    },
     role: {
         type: String,
         required: true,

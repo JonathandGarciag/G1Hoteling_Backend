@@ -1,4 +1,5 @@
 import Hotel from './hotel.model.js';
+import User from '../user/user.model.js';
 import { generarJWT } from "../helpers/generate-jwt.js";
 
 export const getHotels = async (req, res) => {
@@ -15,7 +16,8 @@ export const getHotels = async (req, res) => {
 
 export const createHotel = async (req, res) => {
     try {
-        const { name, address, qualification, amenities } = req.body;
+        const { name, address, qualification, amenities, image } = req.body;
+        const { role, _id: userId } = req.user;
 
         const tokenPayload = { name, createdAt: new Date() };
         const accessToken = await generarJWT(tokenPayload);
@@ -25,8 +27,15 @@ export const createHotel = async (req, res) => {
             address,
             qualification,
             amenities,
+            image,
             accessToken
         });
+
+        if (role === "HOTEL_ROLE") {
+            const user = await User.findById(userId);
+            user.hotelId = hotel._id;
+            await user.save();z
+        }
 
         res.status(201).json({
             success: true,
@@ -39,7 +48,7 @@ export const createHotel = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             success: false,
             msg: "Error al registrar hotel",
@@ -51,9 +60,9 @@ export const createHotel = async (req, res) => {
 export const updateHotel = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, address, qualification, amenities } = req.body;
+        const { name, address, qualification, amenities, image } = req.body;
 
-        const updated = await Hotel.findByIdAndUpdate(id, { name, address, qualification, amenities }, { new: true });
+        const updated = await Hotel.findByIdAndUpdate(id, { name, address, qualification, amenities, image }, { new: true });
 
         if (!updated) {
             return res.status(404).json({ 
@@ -111,4 +120,32 @@ export const assignHotelToUser = async (req, res) => {
             error: error.message
         });
     }
+};
+
+export const rateHotel = async (req, res) => {
+  try {
+    const { rating } = req.body;
+    const hotel = req.hotelDB;
+
+    hotel.votes.push(Number(rating));
+
+    const total = hotel.votes.reduce((acc, val) => acc + val, 0);
+    hotel.qualification = (total / hotel.votes.length).toFixed(2);
+
+    await hotel.save();
+
+    return res.status(200).json({
+      success: true,
+      msg: "Hotel calificado correctamente",
+      qualification: hotel.qualification,
+      totalVotes: hotel.votes.length
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Error al calificar",
+      error: error.message
+    });
+  }
 };

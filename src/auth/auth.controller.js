@@ -2,6 +2,7 @@ import { hash, verify } from "argon2";
 import User from '../user/user.model.js'
 import Hotel from '../hotel/hotel.model.js'; 
 import { generarJWT } from "../helpers/generate-jwt.js";
+import crypto from "node:crypto";
 
 export const register = async (req, res) => {
     try {
@@ -73,33 +74,39 @@ export const login = async (req, res) => {
     }
 };
 
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
 
-export const updateUserRole = async (req, res) => {
-    try {
+  if (!user)
+    return res.status(404).json({ msg: "Correo no registrado" });
 
-        const { id } = req.params;
-        const { role } = req.body;
+  const token = crypto.randomBytes(20).toString('hex');
+  user.resetToken = token;
+  user.resetTokenExpires = Date.now() + 1000 * 60 * 60; 
+  await user.save();
 
-        const user = await User.findByIdAndUpdate(id, { role: role }, { new: true });
+  console.log(`Enlace: http://localhost:3000/reset-password/${token}`);
 
-        if (!user) {
-            return res.status(404).json({
-                msg: "Usuario no encontrado"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            msg: "Rol actualizado correctamente",
-            user
-        });
-
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            message: "Error al actualizar rol",
-            error: error.message,
-        });
-    }
+  return res.json({ msg: "Correo enviado (simulado)", token });
 };
 
+export const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  const user = await User.findOne({
+    resetToken: token,
+    resetTokenExpires: { $gt: Date.now() }
+  });
+
+  if (!user)
+    return res.status(400).json({ msg: "Token inválido o expirado" });
+
+  user.password = await hash(newPassword);
+  user.resetToken = undefined;
+  user.resetTokenExpires = undefined;
+  await user.save();
+
+  return res.json({ msg: "Contraseña actualizada con éxito" });
+};

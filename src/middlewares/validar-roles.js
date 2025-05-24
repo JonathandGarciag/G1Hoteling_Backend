@@ -27,6 +27,17 @@ export const duenioHotel = (req, res, next) => {
   return res.status(403).json({ msg: "No puedes modificar este hotel" });
 };
 
+export const validarAdminOHotelRole = (req, res, next) => {
+  const { role } = req.user;
+
+  if (role === "ADMIN_ROLE" || role === "HOTEL_ROLE") {
+    return next();
+  }
+
+  return res.status(403).json({ msg: "No autorizado: se requiere rol ADMIN o HOTEL" });
+};
+
+
 export const duenioEvento = async (req, res, next) => {
   try {
     const evento = await Evento.findById(req.params.id);

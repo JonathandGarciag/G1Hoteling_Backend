@@ -11,13 +11,24 @@ const hotelSchema = Schema({
         required: [true, 'Address is required']
     },
     qualification: {
-        type: String,
-        required: [true, 'Category is required'],
-        enum: ['1', '2', '3', '4', '5']
+        type: Number,
+        default: 0
+    },
+    votes: {
+        type: [Number], 
+        validate: {
+            validator: (arr) => arr.every(v => ['1','2','3','4','5'].includes(v.toString())),
+            message: 'Las calificaciones deben estar entre 1 y 5'
+        },
+        default: []
     },
     amenities: {
         type: [String],
         default: []
+    },
+    image: {
+        type: String,
+        default: ""
     },
     accessToken: {
         type: String,
