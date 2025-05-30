@@ -20,3 +20,16 @@ export const generarJWT = (uid = '') => {
         
     }); 
 }
+
+export const generarJWTHotel = (payload = {}) => {
+  return new Promise((resolve, reject) => {
+    jwt.sign(
+      payload,
+      process.env.SECRETORPRIVATEKEY,
+      {}, 
+      (err, token) => {
+        err ? reject("No se pudo generar el token") : resolve(token);
+      }
+    );
+  });
+};

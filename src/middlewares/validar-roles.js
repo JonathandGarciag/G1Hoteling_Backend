@@ -1,3 +1,5 @@
+import Reservation from '../reservation/reservation.model.js';
+
 export const validarAdminRole = (req, res, next) => {
   if (!req.user || req.user.role !== "ADMIN_ROLE") {
     return res.status(403).json({ msg: "No autorizado: se requiere rol ADMIN_ROLE" });
@@ -18,7 +20,12 @@ export const adminOMismoHotel = (req, res, next) => {
 
 export const duenioHotel = (req, res, next) => {
   const { role, hotelId: userHotelId } = req.user;
-  const { hotelId } = req.body;
+
+  const hotelId = req.body?.hotelId || req.params?.hotelId || req.query?.hotelId;
+
+  if (!hotelId) {
+    return res.status(400).json({ msg: "hotelId no proporcionado" });
+  }
 
   if (role === "HOTEL_ROLE" && userHotelId?.toString() === hotelId?.toString()) {
     return next();
@@ -70,8 +77,16 @@ export const huespedlByRoom = async (req, res, next) => {
 
 export const duenioFactura = async (req, res, next) => {
   try {
-    const reserva = await Reservation.findById(req.body.reservation);
-    if (!reserva) return res.status(404).json({ msg: "Reservación no encontrada" });
+    const { reservationId } = req.body;
+
+    if (!reservationId) {
+      return res.status(400).json({ success: false, message: "El ID de la reservación es obligatorio." });
+    }
+
+    const reserva = await Reservation.findById(reservationId);
+    if (!reserva) {
+      return res.status(404).json({ success: false, message: "Reservación no encontrada." });
+    }
 
     if (req.user.role === "HOTEL_ROLE" && req.user.hotelId.toString() === reserva.hotelId.toString()) {
       return next();

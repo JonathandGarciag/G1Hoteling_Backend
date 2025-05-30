@@ -1,36 +1,60 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const eventoSchema = new Schema({
-  hotelId: {
-    type: Schema.Types.ObjectId,
-    ref: "Hotel",
-    required: true
+const eventoSchema = new Schema(
+  {
+    hotelId: {
+      type: Schema.Types.ObjectId,
+      ref: "Hotel",
+      required: true,
+    },
+    usuarioId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    titulo: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    descripcion: {
+      type: String,
+      trim: true,
+    },
+    fechaInicio: {
+      type: Date,
+      required: true,
+    },
+    fechaFin: {
+      type: Date,
+      required: true,
+    },
+    capacidad: {
+      type: Number,
+      required: true,
+    },
+    recursosAdicionales: {
+      type: [String],
+      default: [],
+    },
+    estado: {
+      type: String,
+      enum: ["programado", "cancelado", "completado"],
+      default: "programado",
+    },
+    image: {
+      type: String,
+      default: "",
+    },
+    precio: {
+      type: Number,
+      default: 0,
+    },
   },
-  titulo: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  descripcion: {
-    type: String,
-    trim: true
-  },
-  fecha: {
-    type: Date,
-    required: true
-  },
-  serviciosIncluidos: {
-    type: [String],
-    default: []
-  },
-  estado: {
-    type: String,
-    enum: ["programado", "cancelado", "completado"],
-    default: "programado"
+  {
+    timestamps: true,
+    versionKey: false,
   }
-}, {
-  timestamps: true,
-  versionKey: false
-});
+);
 
 export default model("Evento", eventoSchema);

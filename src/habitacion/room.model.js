@@ -41,6 +41,10 @@ const roomSchema = Schema({
     enum: ['disponible', 'reservada', 'en mantenimiento'],
     default: 'disponible'
   },
+  image: {
+    type: String,
+    default: ""
+  },
   amenities: {
     type: [String],
     default: []

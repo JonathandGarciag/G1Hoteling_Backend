@@ -11,7 +11,6 @@ router.get(
     '/viewRooms/:hotelId',
     [
         validarJWT,
-        duenioHotel
     ],
     getRoomsByHotel
 );

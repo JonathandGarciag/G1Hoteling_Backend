@@ -40,7 +40,6 @@ export const updateCredentialsUser = [
 export const validcreateHotels = [
     check('name', 'El nombre es obligatorio').not().isEmpty(),
     check('address', 'La dirección es obligatoria').not().isEmpty(),
-    check('qualification', 'La categoría es obligatoria').isIn(['1', '2', '3', '4', '5']),
     validarCampos
 ];
 
@@ -50,10 +49,16 @@ export const validUpdateHotels = [
 ];  
 
 export const validAssingHotel = [
-    check("userToken", "El token del usuario es obligatorio").not().isEmpty(),
-    check("hotelToken", "El token del hotel es obligatorio").not().isEmpty(),
+    check("userIdentifier", "El identificador del usuario es obligatorio").not().isEmpty(),
+    check("hotelToken", "El token del hotel es obligatorio").not().isEmpty(),,
     validarCampos
 ];  
+
+export const validAssingHotelByIdentifier = [
+    check("userIdentifier", "El identificador del usuario es obligatorio (ID o email)").not().isEmpty(),
+    check("hotelToken", "El token del hotel es obligatorio").not().isEmpty(),
+    validarCampos
+];
 
 export const validCreateRoom = [
     check('hotelId', 'El ID del hotel es obligatorio').not().isEmpty().isMongoId(),
@@ -75,7 +80,6 @@ export const validUpdateRoom = [
 ];
 
 export const validCreateReservation = [
-    check('userId', 'El ID del usuario es obligatorio').not().isEmpty().isMongoId(),
     check('hotelId', 'El ID del hotel es obligatorio').not().isEmpty().isMongoId(),
     check('roomId', 'El ID de la habitación es obligatorio').not().isEmpty().isMongoId(),
     check('startDate', 'La fecha de inicio es obligatoria').not().isEmpty().isISO8601(),
@@ -92,3 +96,10 @@ export const validUpdateReservation = [
     validarCampos
 ];
 
+export const validCreateEventReservation = [
+  check('eventoId', 'El ID del evento es obligatorio').not().isEmpty().isMongoId(),
+  check('cantidadPersonas', 'La cantidad de personas debe ser un número mayor a 0').isInt({ min: 1 }),
+  check('serviciosAdicionales', 'Los servicios adicionales deben ser un arreglo').optional().isArray(),
+  check('precioTotal', 'El precio total debe ser un número positivo').isFloat({ min: 0 }),
+  validarCampos
+];

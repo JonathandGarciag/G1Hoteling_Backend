@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import {
   editarEvento,
-  cancelarEvento,
+  cancelarEvento,obtenerTodosLosEventos,
   obtenerEventosPorHotel,
-  createEvento
+  createEvento, getEventoById
 } from "../eventos/eventos-controller.js";
 import { validarJWT } from '../middlewares/validar-jwt.js';
 import { duenioEvento, duenioHotel } from '../middlewares/validar-roles.js';
@@ -40,11 +40,18 @@ router.patch(
 router.get(
   "/hotel/:hotelId", 
   [
-    validarJWT,
-    duenioHotel
   ],
   obtenerEventosPorHotel
 );
 
+router.get(
+  "/allEvents", 
+  obtenerTodosLosEventos
+);
+
+router.get(
+  "/:id", 
+  getEventoById
+);
 
 export default router;

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createReservation, getReservationsByUser, updateReservation, getReservationsByHotel, deleteReservation } from './reservation.controller.js';
+import { createReservation, getReservationsByUser, getReservationsByUserMe, updateReservation, getReservationsByHotel, deleteReservation } from './reservation.controller.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
 import { adminOMismoHotel, duenioHotel, esMismoUsuario, validarAdminRole } from '../middlewares/validar-roles.js';
@@ -21,6 +21,14 @@ router.get(
     [
         validarJWT,
         esMismoUsuario
+    ],
+    getReservationsByUser
+);
+
+router.get(
+    '/viewReservations/me',
+    [
+        validarJWT,
     ],
     getReservationsByUser
 );

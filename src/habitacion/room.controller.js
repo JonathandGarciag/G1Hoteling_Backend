@@ -2,7 +2,7 @@ import Room from './room.model.js';
 
 export const createRoom = async (req, res) => {
     try {
-    const { hotelId, roomType, capacity, pricePerNight, availability, status, amenities } = req.body;
+    const { hotelId, roomType, capacity, pricePerNight, availability, status, amenities, image } = req.body;
 
     const room = await Room.create({
       hotelId,
@@ -11,7 +11,8 @@ export const createRoom = async (req, res) => {
       pricePerNight,
       availability,
       status,
-      amenities
+      amenities,
+      image
     });
 
     return res.status(201).json({
@@ -51,11 +52,11 @@ export const getRoomsByHotel = async (req, res) => {
 export const updateRoom = async (req, res) => {
   try {
     const { id } = req.params;
-    const { roomType, capacity, pricePerNight, availability, status, amenities } = req.body;
+    const { roomType, capacity, pricePerNight, availability, status, amenities, image } = req.body;
 
     const updatedRoom = await Room.findByIdAndUpdate(
       id,
-      { roomType, capacity, pricePerNight, availability, status, amenities },
+      { roomType, capacity, pricePerNight, availability, status, amenities, image },
       { new: true }
     );
 

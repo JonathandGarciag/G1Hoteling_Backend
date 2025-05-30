@@ -123,3 +123,18 @@ export const updateUserRole = async (req, res) => {
     return res.status(500).json({ msg: "Error al cambiar rol", error });
   }
 };
+
+export const getMyUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id, "-password");
+
+    if (!user) {
+      return res.status(404).json({ msg: "Usuario no encontrado" });
+    }
+
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    return res.status(500).json({ msg: "Error al buscar usuario", error });
+  }
+};

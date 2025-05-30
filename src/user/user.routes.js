@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { deleteUser, getUserAll, getUserById, updateCredentials, updateProfile, updateUserRole } from "./user.controller.js";
+import { deleteUser, getUserAll, getUserById, getMyUser, updateCredentials, updateProfile, updateUserRole } from "./user.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { updateCredentialsUser, updateProfileUser, updateUserRoleValidator } from "../middlewares/validator.js";
@@ -9,7 +9,7 @@ import { tieneRole } from "../middlewares/tiene-role.js";
 
 const router = Router();
 
- router.get(
+router.get(
      '/viewUser', 
      [
         validarJWT,
@@ -18,7 +18,7 @@ const router = Router();
      getUserAll
  );
 
- router.get(
+router.get(
     "/:id",
     [
         validarJWT, 
@@ -68,6 +68,14 @@ router.put(
     ],
     updateUserRoleValidator, 
     updateUserRole 
+);
+
+router.get(
+    "/myUser/:id",
+    [
+        validarJWT,
+    ],
+    getMyUser
 );
 
 

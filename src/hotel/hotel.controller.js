@@ -1,31 +1,45 @@
 import Hotel from './hotel.model.js';
 import User from '../user/user.model.js';
-import { generarJWT } from "../helpers/generate-jwt.js";
+import { generarJWTHotel } from "../helpers/generate-jwt.js";
+import jwt from 'jsonwebtoken';
 
 export const getHotels = async (req, res) => {
-    try {
-        const hotels = await Hotel.find({ status: true });
-        return res.status(200).json({ 
-            success: true, 
-            hotels 
-        });
-    } catch (error) {
-        return res.status(500).json({ success: false, msg: 'Error al obtener hoteles', error: error.message });
-    }
+  try {
+    const hotels = await Hotel.find({ status: true }).lean();
+    const users = await User.find({ hotelId: { $ne: null } }, 'hotelId email');
+
+    const assignedMap = new Map(users.map(user => [user.hotelId.toString(), user.email]));
+
+    const response = hotels.map(hotel => ({
+      ...hotel,
+      assigned: assignedMap.has(hotel._id.toString()),
+      ownerEmail: assignedMap.get(hotel._id.toString()) || null
+    }));
+
+    return res.status(200).json({
+      success: true,
+      hotels: response
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: 'Error al obtener hoteles',
+      error: error.message
+    });
+  }
 };
 
 export const createHotel = async (req, res) => {
     try {
-        const { name, address, qualification, amenities, image } = req.body;
+        const { name, address, amenities, image } = req.body;
         const { role, _id: userId } = req.user;
 
         const tokenPayload = { name, createdAt: new Date() };
-        const accessToken = await generarJWT(tokenPayload);
+        const accessToken = await generarJWTHotel(tokenPayload);
 
         const hotel = await Hotel.create({
             name,
             address,
-            qualification,
             amenities,
             image,
             accessToken
@@ -60,9 +74,9 @@ export const createHotel = async (req, res) => {
 export const updateHotel = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, address, qualification, amenities, image } = req.body;
+        const { name, address, amenities, image } = req.body;
 
-        const updated = await Hotel.findByIdAndUpdate(id, { name, address, qualification, amenities, image }, { new: true });
+        const updated = await Hotel.findByIdAndUpdate(id, { name, address, amenities, image }, { new: true });
 
         if (!updated) {
             return res.status(404).json({ 
@@ -97,29 +111,29 @@ export const deleteHotel = async (req, res) => {
 };
 
 export const assignHotelToUser = async (req, res) => {
-    try {
-        const user = req.userToAssign;
-        const hotel = req.hotelToAssign;
+  try {
+    const user = req.userToAssign;
+    const hotel = req.hotelToAssign;
 
-        user.hotelId = hotel._id;
-        await user.save();
+    user.hotelId = hotel._id;
+    await user.save();
 
-        res.status(200).json({
-            success: true,
-            msg: "Hotel asignado correctamente",
-            user: {
-                id: user._id,
-                email: user.email,
-                hotel: hotel.name
-            }
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            msg: "Error al asignar hotel",
-            error: error.message
-        });
-    }
+    res.status(200).json({
+      success: true,
+      msg: "Hotel asignado correctamente",
+      user: {
+        id: user._id,
+        email: user.email,
+        hotel: hotel.name
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      msg: "Error al asignar hotel",
+      error: error.message
+    });
+  }
 };
 
 export const rateHotel = async (req, res) => {

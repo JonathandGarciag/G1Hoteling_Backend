@@ -3,7 +3,7 @@ import { assignHotelToUser, createHotel, deleteHotel, getHotels, updateHotel, ra
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
 import { adminOMismoHotel, validarAdminRole, validarAdminOHotelRole } from '../middlewares/validar-roles.js';
-import { validAssingHotel, validcreateHotels, validUpdateHotels } from '../middlewares/validator.js';
+import { validAssingHotel, validcreateHotels, validUpdateHotels, validAssingHotelByIdentifier } from '../middlewares/validator.js';
 import { validarTokensHotelUser, validarHotelUnico, validarCalificacion, validarHotelPorId } from '../helpers/db-validator.js';
 
 const router = Router();
@@ -49,7 +49,7 @@ router.post(
     [
       validarJWT,
       validarAdminRole,
-      validAssingHotel,
+      validAssingHotelByIdentifier,
       validarTokensHotelUser
     ],
     assignHotelToUser
